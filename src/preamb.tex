@@ -1,0 +1,346 @@
+
+\mode<presentation> {
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and 
+
+%%%%%%%%%%%%%%%%%%%  from book begin %%%%%%%%%%%%%%%
+\usepackage{hyperref}
+\usepackage{cprotect}
+\def\ttdefault{cmtt}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+
+%\usepackage{minted}
+\usepackage[fleqn]{mathtools}
+\usepackage{listings}
+\usepackage{qrcode}
+\usepackage{lipsum}
+
+%\usepackage[table]{xcolor}	
+ \usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{pgfplots}
+% \usepackage{fancyvrb}@book{ID,
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{trees}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta,quotes}
+\usetikzlibrary{arrows}
+
+\usetikzlibrary{backgrounds, bending,
+	calc,
+	decorations.pathmorphing,
+	fit,
+	petri,
+	positioning}
+\pgfdeclarelayer{foreground}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{back background}
+\pgfsetlayers{back background,
+	background,
+	main,
+	foreground
+}
+
+\tikzset{%
+	>={Latex[width=2mm,length=2mm]},
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,
+		minimum width=4cm, minimum height=1cm,
+		text centered, font=\sffamily},
+	activityStarts/.style = {base, fill=blue!30},
+	startstop/.style = {base, fill=red!30},
+	activityRuns/.style = {base, fill=green!30},
+	process1/.style = {base, minimum width=2.5cm, fill=red, font=\ttfamily},
+ 	processmini/.style = {base, draw=pink!90, minimum width=0.5cm, fill=orange!15,
+		font=\ttfamily},
+	process/.style = {base, minimum width=2.5cm, fill=orange!15,
+		font=\ttfamily},
+}
+% \usepackage[dvipsnames]{xcolor}
+% for double arrows a la chef
+% adapt line thickness and line width, if needed
+% for double arrows a la chef
+% adapt line thickness and line width, if needed
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+	1 with {\arrow[semithick]{open triangle 60}}},
+double distance=1.4pt, shorten >= 5.5pt,
+preaction = {decorate},
+postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+
+\usepackage{amssymb}
+\usepackage{url}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, 
+minimum width=3cm, 
+minimum height=1cm,
+text centered, 
+draw=black, 
+fill=red!30]
+
+\tikzstyle{io} = [trapezium, 
+trapezium stretches=true, % A later addition
+trapezium left angle=70, 
+trapezium right angle=110, 
+minimum width=3cm, 
+minimum height=1cm, text centered, 
+draw=black, fill=blue!30]
+
+\tikzstyle{processjk1} = [rectangle, 
+minimum width=3cm, 
+minimum height=1cm, 
+text centered, 
+text width=3cm, 
+draw=black, 
+fill=orange!30]
+
+\tikzstyle{processjk2} = [rectangle, 
+minimum width=2cm, 
+minimum height=2cm, 
+text centered, 
+text width=3cm, 
+draw=black, 
+fill=orange!30]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\newcommand{\Hrule}[3][.]{%
+	\par\addvspace{#2}%
+	\begingroup\color{#1}%
+	\hrule
+	\endgroup
+	\addvspace{#3}%
+}
+
+\tikzset{
+	state/.style={
+		rectangle,
+		rounded corners,
+		draw=black, very thick,
+		minimum height=2em,
+		inner sep=2pt,
+		text centered,
+	},
+}
+
+\makeatletter
+\pgfkeys{/pgf/.cd,
+	parallelepiped offset x/.initial=2mm,
+	parallelepiped offset y/.initial=2mm
+}
+\pgfdeclareshape{parallelepiped}
+{
+	\inheritsavedanchors[from=rectangle] % this is nearly a rectangle
+	\inheritanchorborder[from=rectangle]
+	\inheritanchor[from=rectangle]{north}
+	\inheritanchor[from=rectangle]{north west}
+	\inheritanchor[from=rectangle]{north east}
+	\inheritanchor[from=rectangle]{center}
+	\inheritanchor[from=rectangle]{west}
+	\inheritanchor[from=rectangle]{east}
+	\inheritanchor[from=rectangle]{mid}
+	\inheritanchor[from=rectangle]{mid west}
+	\inheritanchor[from=rectangle]{mid east}
+	\inheritanchor[from=rectangle]{base}
+	\inheritanchor[from=rectangle]{base west}
+	\inheritanchor[from=rectangle]{base east}
+	\inheritanchor[from=rectangle]{south}
+	\inheritanchor[from=rectangle]{south west}
+	\inheritanchor[from=rectangle]{south east}
+	\backgroundpath{
+		% store lower right in xa/ya and upper right in xb/yb
+		\southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+		\northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+		\pgfmathsetlength\pgfutil@tempdima{\pgfkeysvalueof{/pgf/parallelepiped offset x}}
+		\pgfmathsetlength\pgfutil@tempdimb{\pgfkeysvalueof{/pgf/parallelepiped offset y}}
+		\def\ppd@offset{\pgfpoint{\pgfutil@tempdima}{\pgfutil@tempdimb}}
+		\pgfpathmoveto{\pgfqpoint{\pgf@xa}{\pgf@ya}}
+		\pgfpathlineto{\pgfqpoint{\pgf@xb}{\pgf@ya}}
+		\pgfpathlineto{\pgfqpoint{\pgf@xb}{\pgf@yb}}
+		\pgfpathlineto{\pgfqpoint{\pgf@xa}{\pgf@yb}}
+		\pgfpathclose
+		\pgfpathmoveto{\pgfqpoint{\pgf@xb}{\pgf@ya}}
+		\pgfpathlineto{\pgfpointadd{\pgfpoint{\pgf@xb}{\pgf@ya}}{\ppd@offset}}
+		\pgfpathlineto{\pgfpointadd{\pgfpoint{\pgf@xb}{\pgf@yb}}{\ppd@offset}}
+		\pgfpathlineto{\pgfpointadd{\pgfpoint{\pgf@xa}{\pgf@yb}}{\ppd@offset}}
+		\pgfpathlineto{\pgfqpoint{\pgf@xa}{\pgf@yb}}
+		\pgfpathmoveto{\pgfqpoint{\pgf@xb}{\pgf@yb}}
+		\pgfpathlineto{\pgfpointadd{\pgfpoint{\pgf@xb}{\pgf@yb}}{\ppd@offset}}
+	}
+}
+\makeatother
+
+\definecolor{DarkBlue}{rgb}{0.1,0.1,0.5}
+\definecolor{Black}{rgb}{0.0,0.0,0.0}
+\definecolor{Red}{rgb}{0.9,0.0,0.1}
+\definecolor{DarkBlue2}{rgb}{0.00,0.08,0.6}
+\definecolor{DarkRed2}{rgb}{0.6,0.00,0.08}
+\definecolor{DarkGreen2}{rgb}{0.00,0.6,0.08}
+\definecolor{brilliantrose}{rgb}{1.0, 0.33, 0.64}
+\definecolor{darkpastelgreen}{rgb}{0.01, 0.75, 0.24}
+\definecolor{jgold1}{rgb}{0.85,.66,0}
+\definecolor{jgold}{rgb}{0.35,.76,0}
+\definecolor{jgold2}{rgb}{0.65,.56,0}
+\definecolor{jgblue}{rgb}{0,0.99,0.597}
+
+\definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
+\definecolor{mypink2}{RGB}{219, 48, 122}
+\definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+\definecolor{mygray}{gray}{0.5}
+% see the list of further useful packages
+% in the Reference Guide
+
+\definecolor{customgreen}{rgb}{0,0.6,0}
+\definecolor{customgray}{rgb}{0.5,0.5,0.5}
+\definecolor{custommauve}{rgb}{0.6,0,0.8}
+
+%% See documentation for a0poster class for the size options here
+%%    \normalsize will produce smaller type that might look too small
+%%    \large will produce larger type
+%% Feel free to modify if you want a different look
+\let\Textsize\normalsize
+\def\RHead#1{\noindent\hbox to \hsize{\hfil{\LARGE\color{DarkBlue} #1}}\bigskip}
+\def\LHead#1{\noindent{\LARGE\color{DarkBlue} #1}\bigskip}
+\def\CHead#1{\begin{center}\noindent{\LARGE\color{DarkBlue} #1}\end{center}}
+\def\Subhead#1{\noindent{\Large\color{DarkBlue} #1}\bigskip}
+\def\jjhead#1{\noindent{\large\color{jgold2} #1}\bigskip}
+%\def\Subhead1#1{\noindent{\large\color{jgold} #1}\bigskip}
+\def\Subheadd#1{\noindent{\large\color{brilliantrose} #1}\bigskip}
+\def\Title2#1{\noindent{\textbf{\veryHuge\color{brilliantrose} #1}}}
+
+\def\jHead#1{\begin{left}\noindent{\large\color{DarkBlue} #1}\end{left}}
+
+
+\lstset{ 
+	basicstyle=\small, % the size of the fonts that are used for the code
+	breaklines=true,         % sets automatic line breaking
+	commentstyle=\color{customgreen},    % comment style
+	firstnumber=1,      % start line enumeration with line 1000
+	frame=single,	       % adds a frame around the code
+	keepspaces=true,   % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=10pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{customgray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{custommauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\pgfplotsset{compat=1.18} 
+\usepackage[outline]{contour} % glow around text
+\usepackage{xcolor}
+\colorlet{myred}{red!80!black}
+\colorlet{myblue}{blue!80!black}
+\colorlet{mygreen}{green!60!black}
+\colorlet{myorange}{orange!70!red!60!black}
+\colorlet{mydarkred}{red!30!black}
+\colorlet{mydarkblue}{blue!40!black}
+\colorlet{mydarkgreen}{green!30!black}
+\tikzstyle{node}=[thick,circle,draw=myblue,minimum size=22,inner sep=0.5,outer sep=0.6]
+\tikzstyle{node in}=[node,green!20!black,draw=mygreen!30!black,fill=mygreen!25]
+\tikzstyle{node hidden}=[node,blue!20!black,draw=myblue!30!black,fill=myblue!20]
+\tikzstyle{node convol}=[node,orange!20!black,draw=myorange!30!black,fill=myorange!20]
+\tikzstyle{node out}=[node,red!20!black,draw=myred!30!black,fill=myred!20]
+\tikzstyle{connect}=[thick,mydarkblue] %,line cap=round
+\tikzstyle{connect arrow}=[-{Latex[length=4,width=3.5]},thick,mydarkblue,shorten <=0.5,shorten >=1]
+\tikzset{ % node styles, numbered for easy mapping with \nstyle
+	node 1/.style={node in},
+	node 2/.style={node hidden},
+	node 3/.style={node out},
+}
+\def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} 
+\def\agr#1{{\color{mydarkgreen}a_{#1}^{(0)}}}
+
+\usepackage{colortbl}
+\definecolor{deeppink}{rgb}{1.0, 0.08, 0.58}
+\definecolor{flavescent}{rgb}{0.97, 0.91, 0.56}
+\definecolor{palegreen}{rgb}{0.6, 0.98, 0.6}
+\definecolor{vanilla}{rgb}{0.95, 0.9, 0.67}
+
+
+\usepackage[most]{tcolorbox}
+\usepackage{csquotes}
+\usepackage{nameref}
+\usepackage[english]{babel} 
+%%%%%%%%%%%%%%%%%%%  end book %%%%%%%%%%%%%%%
+
+\usetikzlibrary{arrows.meta}
+\tikzset{%
+	>={Latex[width=2mm,length=2mm]},
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,
+		minimum width=4cm, minimum height=1cm,
+		text centered, font=\sffamily},
+	activityStarts/.style = {base, fill=blue!30},
+	startstop/.style = {base, fill=red!30},
+	activityRuns/.style = {base, fill=green!30},
+	processmini/.style = {base, draw=pink!90, minimum width=0.5cm, fill=orange!15,
+		font=\ttfamily},
+	process/.style = {base, draw=pink!90, minimum width=2.5cm, fill=orange!15,
+		font=\ttfamily},
+}
+
+\newcommand{\framedtext}[1]{%
+\par%
+\noindent\fbox{%
+    \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{#1}%
+}%
+}
+
+\renewcommand\fbox{\fcolorbox{cyan}{white}}

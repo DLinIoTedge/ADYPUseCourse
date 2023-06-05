@@ -1,0 +1,332 @@
+
+
+\begin{frame}
+\frametitle{Model-Based Engineering : SysML Lab}
+\begin{block}{Use Gaphor  for Model Based Engineering }
+
+ gaphor Installation  is  required and also quick reading on gaphor is helpful for user to handle necessary workflow used in the following. 
+ 
+ \vspace{1cm}
+ Requirements list is given in the following.
+ 
+ { \bf Hardware } :  x86 PC or IBM ppc64le CPU based PC  \\
+ { \bf Software } : Ubuntu 22.04 is recommended 
+
+ \end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Gaphor Installation }
+\begin{enumerate}
+\item   \colorbox{pink}{ \textcolor{purple}{sudo apt install python3-virtualenv  } }
+\item   \colorbox{pink}{ \textcolor{purple}{virtualenv sysML } }
+\item   \colorbox{pink}{ \textcolor{purple}{source /home/jk/sysML/local/bin/activate } }
+\item \colorbox{red}{ \textcolor{white}{pip install gaphor } } 
+ // not worked well and to fix the above issue, following workflow is used 
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Gaphor Installation : continuation }
+\begin{enumerate}
+\item  \colorbox{pink}{ \textcolor{purple}{sudo apt install libcairo2-dev pkg-config python3-dev } }
+\item  \colorbox{pink}{ \textcolor{purple}{pip3 install pycairo } }
+\item   \colorbox{pink}{ \textcolor{purple}{pip install --upgrade pip setuptools wheel } }
+\item    \colorbox{green}{ \textcolor{white}{pip install gaphor  } }
+// this time, it worked well
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Jupyterlab Installation }
+\begin{enumerate}
+\item    \colorbox{pink}{ \textcolor{purple}{python3 --version  } }
+\item    \colorbox{pink}{ \textcolor{purple}{pip install jupyter  } }
+\item    \colorbox{gray}{ \textcolor{white}{jupyter notebook  } }
+// use jupyter notebook to program in python. Browser is used,
+\item    \colorbox{pink}{ \textcolor{purple}{pip install jupyterlab  } }
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{ Overeview on gaphor }
+
+Reference is \url{https://gaphor.org/tutorials}. 
+
+Use link \url{https://docs.gaphor.org/en/latest/getting_started.html}  to start 
+working with Model design in gaphor.
+
+\begin{enumerate}
+\item  Model Browser
+\item Diagram Element Toolbox
+\item  Diagrams
+\item Property Editor
+\end{enumerate}
+
+ \end{block}
+\end{frame}
+
+    
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Launching gaphor }
+\begin{enumerate}
+\item    \colorbox{red}{ \textcolor{white}{gaphor  } } 
+// above launch  is not working. Thus there is a need to fix above issue by using following workflow, 
+
+\item    \colorbox{pink}{ \textcolor{purple}{ sudo apt-get install libgtk-3-dev } } 
+// this is to install GTK version 3 lib 
+\end{enumerate}
+
+Similar issue is reported in the following URL.
+
+\url{https://github.com/jamiemcg/Remarkable/issues/368}
+
+\vspace{1cm}
+use dpkg -l | grep 'gtksource'  to get version of Gtk which is installed in PC
+
+\end{block}
+\end{frame}
+\newpage 
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{ Install libgtksourceview }
+\begin{enumerate} 
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt-get update  } }
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt-get install libgtksourceview-3.0-dev  } }
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Fix Issues in Launching gaphor }
+
+Following file is having definition for versions of Gtk.  It appears that there is issue in version of Gtk installed in PC and above version definition.  After going through multiple iterations in trying different versions of Gtk, i thought it is safe to comment version definition for Gtk.   By doing this there is no conflict in version of Gtk installed and version defined for use.   I wish this fix will work for others as well.  Fix is required to edit following file  to comment version definitions for for Gtk.
+
+\end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Fix Issues in Launching gaphor : continuation }
+
+  \colorbox{gray}{ \textcolor{white} 
+ { { \scriptsize \url{"/home/jk/.local/lib/python3.10/site-packages/gaphor/ui/__init__.py", }  }   } }   line 12 of file, in <module>
+
+
+
+\textcolor{red}{raise ValueError ..... ValueError: Namespace Gtk not available for version 5.0  }
+
+{\bf Fix 1:  } 
+in the above file,   change from 5 to 4 it will work.  But this fix did not work
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Fix Issues in Launching gaphor : continuation }
+ 
+  
+
+{\bf Fix 2 : } 
+Comment version definitions for Gtk by 
+placing  \textcolor{green}{ \#  } in the following  lines at start.  Let,  it choose version of its own choice
+
+
+\textcolor{green}{ \#  } gi.require$\_$version("Gtk", "4.0") \\
+\textcolor{green}{ \#  } gi.require$\_$version("Gdk", "4.0") \\
+\textcolor{green}{ \#  } gi.require$\_$version("GtkSource", "4") \\
+gi.require$\_$version("Adw", "1") \\
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Launch gaphor }
+
+Following is used to launch gaphor and also it worked  with out issues.
+
+\begin{enumerate} 
+\item    \colorbox{green}{ \textcolor{white}{ gaphor } }
+\end{enumerate}
+
+\end{block}
+\end{frame}
+
+
+
+
+\newpage
+
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{Reference }
+
+\begin{enumerate} 
+\item    \url{https://docs.gaphor.org/en/latest/getting_started.html }
+\end{enumerate}
+
+
+\end{block}
+\end{frame}
+
+
+
+ 
+
+
+\newpage
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{ Event and Data Flow in Model Based Engineering }
+
+	\begin{tikzpicture}[node distance=1.5cm,
+		every node/.style={fill=white, font=\sffamily}, align=center, scale= 0.7, transform shape]
+		
+		% Specification of nodes (position, etc.)
+		\node (start)             [activityStarts]              
+		{ Logical level };
+		
+		
+		\node (onCreateBlock)     [process, below of=start]          {\textcolor{cyan}{ \bf{ Requirements}}};
+		\node (onResumeBlock)     [process, below of=onCreateBlock]  {\textcolor{cyan}{ \bf{ PortsAndFlows}}};
+		
+		\node (activityRuns)      [process, below of=onResumeBlock]	{\textcolor{cyan}{ \bf{  ModelElements}}};
+		
+		\node (activityRuns2)      [process, below of=activityRuns , fill = green]	{\textcolor{blue}{ \bf{ Libraries}}};
+		
+		\node (onCreateBlockAD3)     [process, below of=activityRuns2 ]          {\textcolor{cyan}{ \bf{ ConstraintBlocks}}};
+		
+		\node (activityRuns3)      [process, below of=onCreateBlockAD3 ]	{\textcolor{cyan}{ \bf{ Blocks}}};
+		
+		\node (onCreateBlockAD6a)     [processmini, right of=activityRuns3 , fill =red, xshift=1cm]          {\textcolor{white}{ \bf{ Allocations}}};
+		
+		
+		
+		\node (startAD)     [ activityStarts, right of=start , xshift=3cm ]  { Concept Level };
+		
+		\node (onCreateBlockAD)     [process, below of=startAD , fill =pink]          {\textcolor{red}{ \bf{Requirements}}};
+		
+		\node (onCreateBlockAD6)     [processmini, right of=activityRuns2 , fill =red, xshift=1.2cm]          {\textcolor{white}{ \bf{ IP}}};
+
+  \node (onCreateBlockAD2)     [process, below of=onCreateBlockAD , fill =pink]          {\textcolor{red}{ \bf{ Context Diagram}}};
+		
+		
+		\node (onCreateBlockAD1)     [process, right of=onCreateBlockAD6 , fill =green,xshift=0.3cm]          {\textcolor{blue}{ \bf{ vendors IP}}};
+		
+			\node (onCreateBlockAD5)     [process, right of=onCreateBlockAD1, fill =yellow, xshift=1cm]          {\textcolor{red}{ \bf{  Design}} \\  \textcolor{red}{ \bf{  Details}} };
+			
+		
+		\node (activityRuns4)      [process, below of=onCreateBlockAD2 , fill = pink]	{\textcolor{red}{ \bf{  Domain Diagram}}};
+		
+		\node (activityRuns5)      [process, below of=onCreateBlockAD1 , fill = green]	{\textcolor{blue}{ \bf{ Activities}}};
+		
+		
+		
+		\node (onCreateBlockAD4)     [process, right of=activityRuns5 , fill =yellow, xshift=1.4cm]          {\textcolor{red}{  Technology  }  \\  \textcolor{red}{Level} };
+		
+		
+		
+		
+		\draw[->]  [color= cyan]  (start) -- (onCreateBlock);
+		\draw[->] [color= cyan] (onCreateBlock) -- (onResumeBlock);
+		\draw[->] [color= cyan] (onResumeBlock) -- (activityRuns);
+		
+		\draw[->] [color= cyan] (activityRuns)  -- (activityRuns2);
+		
+		\draw[->]  [color= cyan]   (onCreateBlockAD4)  -- (onCreateBlockAD5); 
+		
+		\draw[->]  [color= cyan]   (onCreateBlockAD5)  |- (onCreateBlockAD);
+		
+		\draw[->]  [color= cyan] (startAD)  -- (onCreateBlockAD);
+		\draw[->]  [color= cyan](onCreateBlockAD)  -- (onCreateBlockAD2);
+		\draw[->]  [color= cyan](onCreateBlockAD2)  -- (activityRuns4);
+		
+		
+		\draw[->]  [color= cyan](onCreateBlockAD1)  -- (activityRuns2);
+		
+		
+		\draw[->]  [color= cyan](activityRuns2)  -- (onCreateBlockAD3);
+		
+		\draw[->]  [color= cyan](onCreateBlockAD3)  -- (activityRuns3);
+		
+		\draw[->]  [color= blue](activityRuns5)  -- (onCreateBlockAD4);
+		\draw[->]  [color= cyan](activityRuns4)  -- (onCreateBlockAD1);
+		
+		\draw[->]  [color= red](activityRuns2)  -| (onCreateBlockAD6);
+		\draw[->]  [color= red](onCreateBlockAD6a)  -| (activityRuns5);
+		\draw[->]  [color= blue](onCreateBlockAD)  -- (onCreateBlock);
+		
+				
+	\end{tikzpicture}
+
+\end{block}
+\end{frame}
+
+
+
+
+
+
+\newpage
+
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{ GUI vs Jupyter Notebook  Scripting }
+
+\begin{enumerate} 
+\item    \url{https://docs.gaphor.org/en/latest/scripting.html }
+\end{enumerate}
+
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+
+\begin{frame}
+\frametitle{SysML Lab}
+\begin{block}{ Dependency List and Installation }
+
+\begin{enumerate} 
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt install graphviz } }  
+\item    \colorbox{pink}{ \textcolor{purple}{sudo pip install pydot } }
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt  install inkscape } }  
+\item    \colorbox{pink}{ \textcolor{purple}{export PATH=\$PATH=/Library/TeX/texbin } }  
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt-get install texlive-xetex  } }  
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt-get install  texlive-fonts-recommended  } } 
+\item    \colorbox{pink}{ \textcolor{purple}{sudo apt-get install  texlive-plain-generic } } 
+\item    \colorbox{pink}{ \textcolor{purple}{  python -m jupyter nbconvert --to pdf tst1.ipynb} }  
+\end{enumerate}
+
+
+\end{block}
+\end{frame}
