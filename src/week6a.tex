@@ -1,0 +1,657 @@
+
+\title[Systems Engineering]{Systems Complexity } 
+
+
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring the Complexity of Networks: Kolmogorov Complexity versus Entropy}
+
+
+Algorithmic entropy (also known as Kolmogorov complexity or -complexity for short) evaluates the complexity of the description required for a lossless recreation of the network
+
+
+ 
+\end{block}
+\end{frame}
+
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring  Complexity of Systems }
+
+
+
+\begin{figure}[hbt!]
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+s1/.style={rectangle, draw=cyan!60, fill=red!5, very thick, minimum size=5mm},
+s2/.style={rectangle, draw=cyan , fill=cyan!5, very thick, minimum size=5mm},
+s3/.style={rectangle, draw=green , fill=green!5, very thick, minimum size=5mm},
+s4/.style={rectangle, draw=gray , fill=gray!5, very thick, minimum size=5mm},
+]
+
+\tikzstyle{block} = [draw, rectangle, text width = 5em, 
+  text centered, minimum height = 6mm, node distance = 5em];
+  
+%Nodes
+\node[squarednode]      (maintopic)                              {Design};
+\node[roundnode]        (uppercircle)       [above=of maintopic] {Fund};
+\node[squarednode]      (rightsquare)       [right=of maintopic] {Make};
+\node[roundnode]        (inference)       [below=of rightsquare] {Deploy};
+\node[squarednode]      (dataset)            [left=of maintopic] {Reqts};
+\node[s1]      (students)            [left=of dataset] {Govt};
+\node[s1]      (researcher)            [above=of students, yshift=-0.9cm] {Researcher};
+\node[s1]      (enterprise)            [above=of researcher, yshift=-0.9cm] {Enterprise};
+\node[s2]      (DLtrain)            [right=of uppercircle] {Loan 16 $\%$};
+\node[s2]      (PyTorch)            [above=of DLtrain, yshift=-0.9cm] {Equity};
+\node[s2]      (TensorFlow)            [above=of PyTorch, yshift=-0.9cm] {Grants};
+\node[s3]      (cpu)            [right=of rightsquare , yshift =-0.5cm] {India};
+\node[s3]      (cpugpu)            [above=of cpu, yshift=-0.9cm] {West};
+\node[s3]      (fpga)            [above=of cpugpu, yshift=-0.9cm] {China};
+\node[block]      (tcpu)            [below=of maintopic , yshift=1.3cm] { local \\ buy};
+
+%Lines
+\draw[->] (uppercircle.south) -- (maintopic.north);
+\draw[->] (maintopic.east) -- (rightsquare.west);
+\draw[->] (rightsquare.south) --  (inference.north);
+\draw[->] (dataset.east) -- (maintopic.west);
+\draw[->] [color =blue] (students.east) -- (dataset.west);
+\draw[->] [color =blue] (researcher.east) -- (dataset.west);
+\draw[->] [color =blue] (enterprise.east) -- (dataset.west);
+\draw[->] [color =pink] (DLtrain.west) -- (uppercircle.east);
+\draw[->] [color =pink] (PyTorch.west) -- (uppercircle.east);
+\draw[->] [color =pink] (TensorFlow.west) -- (uppercircle.east);
+\draw[->] [color =pink] (cpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (cpugpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (fpga.west) -- (rightsquare.east);
+\draw[->] [color =pink] (tcpu.north) -- (maintopic.south);
+
+\end{tikzpicture}
+\caption{ Work Flow in  System Engineering }
+\label{overviewwrkflowinAIapplicaion}
+\end{figure}
+ 
+\end{block}
+\end{frame}
+
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring  Complexity of Systems in Requirements }
+
+
+
+\begin{figure}[hbt!]
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+s1/.style={rectangle, draw=cyan!60, fill=red!5, very thick, minimum size=5mm},
+s2/.style={rectangle, draw=cyan , fill=cyan!5, very thick, minimum size=5mm},
+s3/.style={rectangle, draw=green , fill=green!5, very thick, minimum size=5mm},
+s4/.style={rectangle, draw=gray , fill=gray!5, very thick, minimum size=5mm},
+]
+
+\tikzstyle{block} = [draw, rectangle, color=red, text width = 5em, 
+  text centered, minimum height = 6mm, node distance = 5em];
+  
+%Nodes
+\node[squarednode]      (maintopic)                              {Design};
+\node[squarednode]      (rightsquare)       [right=of maintopic] {Make};
+\node[roundnode]        (inference)       [below=of rightsquare] {Deploy};
+\node[squarednode]      (dataset)            [left=of maintopic] {Collect};
+\node[s1]      (students)            [left=of dataset] {Govt};
+\node[s1]      (researcher)            [above=of students, yshift=-0.9cm] {Researcher};
+\node[s1]      (enterprise)            [above=of researcher, yshift=-0.9cm] {Enterprise};
+\node[s3]      (cpu)            [right=of rightsquare , yshift =-0.5cm] {India};
+\node[s3]      (cpugpu)            [above=of cpu, yshift=-0.9cm] {West};
+\node[s3]      (fpga)            [above=of cpugpu, yshift=-0.9cm] {China};
+\node[s1]  (req1)  [below=of dataset ] {Requirements };
+\node[block]      (gaphor)            [above=of dataset ] { MATALB \\  \textcolor{green}{gaphor }   \\ XL };
+
+
+%Lines
+\draw[->] (maintopic.east) -- (rightsquare.west);
+\draw[->] (rightsquare.south) --  (inference.north);
+\draw[->] (dataset.east) -- (maintopic.west);
+\draw[->] [color =blue] (students.east) -- (dataset.west);
+\draw[->] [color =blue] (researcher.east) -- (dataset.west);
+\draw[->] [color =blue] (enterprise.east) -- (dataset.west);
+\draw[->] [color =pink] (cpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (cpugpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (fpga.west) -- (rightsquare.east);
+\draw[->] [color =pink] (req1.north) -- (dataset.south);
+\draw[->] [color =pink] (gaphor.south) -- (dataset.north);
+
+\end{tikzpicture}
+\caption{ Requirements Complexity Estimation }
+\label{reqwrkflowinAIapplicaion}
+\end{figure}
+ 
+\end{block}
+\end{frame}
+
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring  Complexity of Systems in Design }
+
+
+
+\begin{figure}[hbt!]
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+s1/.style={rectangle, draw=cyan!60, fill=red!5, very thick, minimum size=5mm},
+s2/.style={rectangle, draw=cyan , fill=cyan!5, very thick, minimum size=5mm},
+s3/.style={rectangle, draw=green , fill=green!5, very thick, minimum size=5mm},
+s4/.style={rectangle, draw=gray , fill=gray!5, very thick, minimum size=5mm},
+]
+
+\tikzstyle{block} = [draw, rectangle, color=gray, text width = 6em, 
+  text centered, minimum height = 6mm, node distance = 5em];
+  
+%Nodes
+\node[squarednode]      (maintopic)                              {Design};
+\node[squarednode]      (rightsquare)       [right=of maintopic] {Make};
+\node[roundnode]        (inference)       [below=of rightsquare] {Deploy};
+\node[squarednode]      (dataset)            [left=of maintopic] {Collect};
+\node[s1]      (students)            [left=of dataset] {Govt};
+\node[s1]      (researcher)            [above=of students, yshift=-0.9cm] {Researcher};
+\node[s1]      (enterprise)            [above=of researcher, yshift=-0.9cm] {Enterprise};
+\node[s3]      (cpu)            [right=of rightsquare , yshift =-0.5cm] {India};
+\node[s3]      (cpugpu)            [above=of cpu, yshift=-0.9cm] {West};
+\node[s3]      (fpga)            [above=of cpugpu, yshift=-0.9cm] {China};
+\node[s1]  (req1)  [below=of dataset ] {Requirements };
+\node[block]      (gaphor)            [above=of maintopic ] { \textcolor{green}{Set, Metric}  \\ 
+\textcolor{red}{Counting}  };
+
+\node[roundnode]        (analysis)       [above=of dataset , yshift=-0.3cm] {Analysis};
+
+
+%Lines
+\draw[->] (maintopic.east) -- (rightsquare.west);
+\draw[->] (rightsquare.south) --  (inference.north);
+\draw[->] (dataset.north) -- (analysis.south);
+\draw[->] [color =blue] (students.east) -- (dataset.west);
+\draw[->] [color =blue] (researcher.east) -- (dataset.west);
+\draw[->] [color =blue] (enterprise.east) -- (dataset.west);
+\draw[->] [color =pink] (cpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (cpugpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (fpga.west) -- (rightsquare.east);
+\draw[->] [color =pink] (req1.north) -- (dataset.south);
+\draw[->] [color =pink] (gaphor.west) |- (analysis.north);
+
+\draw[->] [color =pink] (analysis.east) -| (maintopic.north);
+
+\end{tikzpicture}
+\caption{ Design Complexity Estimation }
+\label{andesignwrkflowinAIapplicaion}
+\end{figure}
+ 
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Understand the Kolmogorov Complexity:}
+
+
+ Kolmogorov complexity measures the amount of information required to describe or specify an object or a sequence of symbols. It represents the shortest possible description of the object, assuming a specific computing model. In this case, we are interested in determining the complexity of requirements, which are typically represented as textual documents.
+
+ thanks to chatGPT
+ 
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Define a Representation Scheme:}
+
+ In order to compute the Kolmogorov complexity of requirements, you need to establish a representation scheme. This scheme should enable you to encode the requirements as a sequence of symbols that can be processed by a computing model.
+
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Choose a Universal Turing Machine (UTM):}
+
+choose vendor 
+
+
+ A UTM is a theoretical machine capable of simulating any other Turing machine. You need to select a specific UTM to compute the complexity. The choice of UTM may affect the complexity measurements, so it is important to document the selection.
+
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Develop an Encoding Scheme:}
+
+ Once you have a representation scheme and a UTM, you need to develop an encoding scheme that maps the requirements into a sequence of symbols. The encoding scheme should preserve the meaning of the requirements and be compatible with the chosen UTM.
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Compute the Complexity: }
+
+
+To compute the Kolmogorov complexity of a set of requirements, you need to find the shortest program (in the chosen UTM's language) that can generate the requirements. This requires searching through all possible programs and finding the smallest one that produces the requirements when executed.
+
+
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Kolmogorov complexity may not be directly applicable  }
+While the Kolmogorov complexity may not be directly applicable in its purest form for evaluating the complexity of requirements in system engineering, it can still serve as a theoretical foundation for understanding information representation and compression. Other metrics and approaches, such as functional requirements analysis, non-functional requirements assessment, or stakeholder satisfaction evaluation, are typically more relevant and effective in the context of system engineering.
+
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Consider Limitations: }
+
+
+
+Keep in mind that the Kolmogorov complexity is an idealized measure that assumes an optimal encoding scheme and a specific computing model. In practice, it is not possible to compute the exact Kolmogorov complexity, especially for complex real-world requirements. Therefore, any practical estimation of complexity will be an approximation.
+
+\end{block}
+\end{frame}
+
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Kolmogorov complexity assumes an optimal encoding  }
+
+
+the Kolmogorov complexity assumes an optimal encoding scheme that is specifically tailored to the chosen UTM. If the encoding scheme does not effectively capture the nuances and semantics of the requirements, the complexity measurements may not accurately reflect the true complexity of the system.
+
+Thus, choice of UTM is not an issue ???
+
+While the choice of a Universal Turing Machine (UTM) is an important consideration when using Kolmogorov complexity, it is not necessarily an issue. The UTM serves as a reference machine for measuring the complexity of a given object or sequence, and different UTMs may yield different complexity measurements.
+
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Same UTM ???? }
+
+
+The choice of UTM becomes significant when comparing complexity measurements between different objects or sequences. If the same UTM is consistently used for all comparisons, the relative complexity rankings can still provide useful insights.
+
+
+\end{block}
+\end{frame}
+
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ Worst case situation }
+
+
+Yes, you are correct. Kolmogorov complexity can provide theoretical insights and is particularly useful for understanding the worst-case scenario in terms of information representation and compression. By measuring the complexity of an object or sequence, it provides an upper bound on the amount of information required to describe or specify that object.
+
+
+In system engineering, considering the worst-case Kolmogorov complexity can be beneficial as it helps identify the upper limit of complexity for a given set of requirements. This knowledge can be valuable for understanding the inherent complexity of a system and can guide decisions related to system design, optimization, and resource allocation.
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ Domain experts }
+
+
+However, it's important to note that the worst-case Kolmogorov complexity represents an idealized scenario and may not always align with practical considerations or real-world complexity. It should be used in conjunction with other metrics, domain expertise, and practical constraints to ensure a comprehensive understanding of system complexity in system engineering.
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ UTM vs Domain Experts !!!! }
+
+
+When using Kolmogorov complexity in the context of system engineering, it's important to consider that the choice of UTM should align with the characteristics and computational capabilities of the real-world system under analysis. If the chosen UTM is not a good representation of the system, the complexity measurements obtained may not accurately reflect the real-world complexity.
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ use UTM  and Domain Experts }
+
+
+By leveraging the expertise of domain specialists and using theoretical frameworks like UTMs as a complementary tool, system engineers can gain a more comprehensive understanding of the complexities involved and make informed decisions to address them effectively.
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{  K(s) useful or not  }
+
+the practical usefulness of K(s) in system engineering is limited. Other metrics and approaches, such as expert analysis, stakeholder consultations, and domain-specific methodologies, are typically more suitable for evaluating and managing the complexity of requirements in real-world scenarios.
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ incomputabtility of K(s)  }
+
+The incomputability of Kolmogorov complexity refers to the fact that, in general, there is no algorithm or systematic procedure that can compute the exact Kolmogorov complexity of an arbitrary string. This is known as the incompleteness theorem, which was proven by algorithmic information theory pioneers like Ray Solomonoff, Andrey Kolmogorov, and Gregory Chaitin.
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ ISRO as UTM }
+need to define an encoding scheme that translates the requirement into a sequence of symbols compatible with ISRO's computational model. Here's an example of how you can represent the requirement:
+
+Representation Scheme for ISRO as UTM:
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ CubeSat Specification: }
+
+
+Encoding: "CSpec:{specifications}"
+
+Example: "CSpec:{size=10cm, weight=1kg, power=5W, sensors=[temperature, humidity, pressure], storage=1GB}"
+
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ Launch Plan:}
+Encoding: "Launch:{plan}"
+
+Example: "Launch:{vehicle=PolarSat-XL, site=Sriharikota, schedule=Q4 2023, regulations=ISRO launch guidelines}"
+
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ Weather Data Service: }
+Encoding: "Weather:{service}"
+
+Example: "Weather:{dataTypes=[temperature, humidity, pressure], frequency=30 minutes, protocols=[TCP, UDP], storage=Cloud}"
+
+\end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ Ground Station Setup: }
+Encoding: "Ground:{setup}"
+
+Example: "Ground:{antenna=4.5m dish, receiver=L-band, processing=real-time, dissemination=web portal}"
+
+\end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ Integration and Testing: }
+Encoding: "Integration:{procedures}"
+
+Example: "Integration:{integrationPlan=AIT, testing=thermal vacuum, acceptanceCriteria=meet CubeSat standards}"
+
+\end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ ISRO as UTM  : example }
+In this representation scheme, each component of the requirement is encoded with a prefix corresponding to its category (e.g., "CSpec" for CubeSat Specification). The specific details and parameters are enclosed within curly brackets ({}) and separated by commas.
+
+The encoded representation provides a structured format for capturing the essential information of the requirement in a way that is compatible with ISRO's computational model.
+
+\end{block}
+\end{frame}
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{ conventions of ISRO's computational}
+
+It's important to note that this encoding scheme is an example, and you may need to adapt or modify it based on the specific requirements and conventions of ISRO's computational model and encoding standards.
+\end{block}
+\end{frame}
+%jk }
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring  Complexity of Systems in Design }
+
+
+
+\begin{figure}[hbt!]
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+s1/.style={rectangle, draw=cyan!60, fill=red!5, very thick, minimum size=5mm},
+s2/.style={rectangle, draw=cyan , fill=cyan!5, very thick, minimum size=5mm},
+s3/.style={rectangle, draw=green , fill=green!5, very thick, minimum size=5mm},
+s4/.style={rectangle, draw=gray , fill=gray!5, very thick, minimum size=5mm},
+]
+
+\tikzstyle{block} = [draw, rectangle, color=red, text width = 5em, 
+  text centered, minimum height = 6mm, node distance = 5em];
+  
+%Nodes
+\node[squarednode]      (maintopic)                              {Design};
+\node[squarednode]      (rightsquare)       [right=of maintopic] {Make};
+\node[roundnode]        (inference)       [below=of rightsquare] {Deploy};
+\node[squarednode]      (dataset)            [left=of maintopic] {Collect};
+\node[s1]      (students)            [left=of dataset] {Govt};
+\node[s1]      (researcher)            [above=of students, yshift=-0.9cm] {Researcher};
+\node[s1]      (enterprise)            [above=of researcher, yshift=-0.9cm] {Enterprise};
+\node[s3]      (cpu)            [right=of rightsquare , yshift =-0.5cm] {India};
+\node[s3]      (cpugpu)            [above=of cpu, yshift=-0.9cm] {West};
+\node[s3]      (fpga)            [above=of cpugpu, yshift=-0.9cm] {China};
+\node[s1]  (req1)  [below=of dataset ] {Requirements };
+\node[block]      (gaphor)            [above=of maintopic ] { \textcolor{green}{local design}  \\ \textcolor{gray}{buy}  \\
+\textcolor{red}{copy}  };
+
+
+%Lines
+\draw[->] (maintopic.east) -- (rightsquare.west);
+\draw[->] (rightsquare.south) --  (inference.north);
+\draw[->] (dataset.east) -- (maintopic.west);
+\draw[->] [color =blue] (students.east) -- (dataset.west);
+\draw[->] [color =blue] (researcher.east) -- (dataset.west);
+\draw[->] [color =blue] (enterprise.east) -- (dataset.west);
+\draw[->] [color =pink] (cpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (cpugpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (fpga.west) -- (rightsquare.east);
+\draw[->] [color =pink] (req1.north) -- (dataset.south);
+\draw[->] [color =pink] (gaphor.south) -- (maintopic.north);
+
+\end{tikzpicture}
+\caption{ Design Complexity Estimation }
+\label{designwrkflowinAIapplicaion}
+\end{figure}
+ 
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{others view on Design Complexity }
+
+\url{https://www.linkedin.com/posts/jayakumarsingaram_grow-economy-create-jobs-etc-are-part-of-activity-7073610723087581184-cTym?utm_source=share&utm_medium=member_desktop}
+
+
+ 
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring  Complexity of Systems  in Making}
+
+
+
+\begin{figure}[hbt!]
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+s1/.style={rectangle, draw=cyan!60, fill=red!5, very thick, minimum size=5mm},
+s2/.style={rectangle, draw=cyan , fill=cyan!5, very thick, minimum size=5mm},
+s3/.style={rectangle, draw=green , fill=green!5, very thick, minimum size=5mm},
+s4/.style={rectangle, draw=gray , fill=gray!5, very thick, minimum size=5mm},
+]
+
+\tikzstyle{block} = [draw, rectangle, color=red, text width = 5em, 
+  text centered, minimum height = 6mm, node distance = 5em];
+  
+%Nodes
+\node[squarednode]      (maintopic)                              {Design};
+\node[squarednode]      (rightsquare)       [right=of maintopic] {Make};
+\node[roundnode]        (inference)       [below=of rightsquare] {Deploy};
+\node[squarednode]      (dataset)            [left=of maintopic] {Collect};
+\node[s1]      (students)            [left=of dataset] {Govt};
+\node[s1]      (researcher)            [above=of students, yshift=-0.9cm] {Researcher};
+\node[s1]      (enterprise)            [above=of researcher, yshift=-0.9cm] {Enterprise};
+\node[s3]      (cpu)            [right=of rightsquare , yshift =-0.5cm] {India};
+\node[s3]      (cpugpu)            [above=of cpu, yshift=-0.9cm] {West};
+\node[s3]      (fpga)            [above=of cpugpu, yshift=-0.9cm] {China};
+\node[s1]  (req1)  [below=of dataset ] {Requirements };
+\node[block]      (gaphor)            [above=of inference ] { \textcolor{green}{local make}  \\ \textcolor{gray}{buy}  \\
+\textcolor{red}{box making}  };
+
+
+%Lines
+\draw[->] (maintopic.east) -- (rightsquare.west);
+\draw[->] (rightsquare.south) --  (inference.north);
+\draw[->] (dataset.east) -- (maintopic.west);
+\draw[->] [color =blue] (students.east) -- (dataset.west);
+\draw[->] [color =blue] (researcher.east) -- (dataset.west);
+\draw[->] [color =blue] (enterprise.east) -- (dataset.west);
+\draw[->] [color =pink] (cpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (cpugpu.west) -- (rightsquare.east);
+\draw[->] [color =pink] (fpga.west) -- (rightsquare.east);
+\draw[->] [color =pink] (req1.north) -- (dataset.south);
+\draw[->] [color =pink] (gaphor.south) -- (inference.north);
+
+\end{tikzpicture}
+\caption{ Complexity Estimation in Making }
+\label{makewrkflowinAIapplicaion}
+\end{figure}
+ 
+\end{block}
+\end{frame}
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{On Measuring the Complexity of Networks: Kolmogorov Complexity versus Entropy}
+
+
+\url{https://www.hindawi.com/journals/complexity/2017/3250301/}
+ 
+\end{block}
+\end{frame}
+
+
+
+\newpage
+\begin{frame}
+\frametitle{Systems Complexity }
+\begin{block}{Kolmogorov Complexity versus Entropy}
+
+
+\url{https://www.jkuse.com/home/jkevents/pmu}
+ 
+\end{block}
+\end{frame}
